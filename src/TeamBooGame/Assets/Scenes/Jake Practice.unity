@@ -527,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4625323527650550, guid: 9d4191e0d9d5008409c0a5fd49ce7844, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.47
+      value: -5.41
       objectReference: {fileID: 0}
     - target: {fileID: 4625323527650550, guid: 9d4191e0d9d5008409c0a5fd49ce7844, type: 3}
       propertyPath: m_LocalPosition.z
@@ -565,6 +565,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114089913365182812, guid: 9d4191e0d9d5008409c0a5fd49ce7844,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1352464817}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d4191e0d9d5008409c0a5fd49ce7844, type: 3}
 --- !u!1 &61468324
@@ -5643,6 +5648,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1 &1352464817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309207510680214, guid: d244e81dfa06f8c418f07adb45c55fe1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1943770137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1454776968
 GameObject:
   m_ObjectHideFlags: 0
@@ -8148,6 +8159,71 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.15
       objectReference: {fileID: 0}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: MainCanvas
+      value: 
+      objectReference: {fileID: 1111032070}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: OptionsUI
+      value: 
+      objectReference: {fileID: 1731275367}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: fullscreenToggle
+      value: 
+      objectReference: {fileID: 763609356}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: resolutionDropdown
+      value: 
+      objectReference: {fileID: 269220438}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: vSyncDropdown
+      value: 
+      objectReference: {fileID: 2133426866}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: antialiasingDropdown
+      value: 
+      objectReference: {fileID: 1808835964}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: textureQualityDropdown
+      value: 
+      objectReference: {fileID: 2031746577}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: musicVolumeSlider
+      value: 
+      objectReference: {fileID: 1491802863}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: applyButton
+      value: 
+      objectReference: {fileID: 762428663}
+    - target: {fileID: 114495000732846764, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: batterySlider
+      value: 
+      objectReference: {fileID: 2093107155}
+    - target: {fileID: 114495000732846764, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1668194256}
+    - target: {fileID: 114495000732846764, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: pickUpUI
+      value: 
+      objectReference: {fileID: 2004943641}
+    - target: {fileID: 114495000732846764, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: inGameMenuUI
+      value: 
+      objectReference: {fileID: 439512571}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d244e81dfa06f8c418f07adb45c55fe1, type: 3}
 --- !u!1 &1954245560
