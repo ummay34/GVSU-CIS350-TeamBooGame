@@ -5,9 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/FreeHorrorGameKit/Scenes/Menu Scene.unity
     guid: 7960b9bd0fc262d409394d74517fda03
-  - enabled: 1
+  - enabled: 0
     path: Assets/FreeHorrorGameKit/Scenes/Demo Scene.unity
     guid: d1774bdf02b008d499d674c949f219e5
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: deb88bd0f2260164697ef945b3788624
+  m_configObjects: {}
