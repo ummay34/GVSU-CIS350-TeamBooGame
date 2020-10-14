@@ -21,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float batteryMax = 100;
     public float removeBatteryValue = 0.05f;
     public float secondToRemoveBaterry = 5f;
+    public bool off;
 
     [Header("Audio Settings")]
     public AudioClip slenderNoise;
@@ -49,6 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
         // set initial battery values
         batterySlider.GetComponent<Slider>().maxValue = batteryMax;
         batterySlider.GetComponent<Slider>().value = batteryMax;
+        off = false;
 
         // start consume flashlight battery
         StartCoroutine(RemoveBaterryCharge(removeBatteryValue, secondToRemoveBaterry));
@@ -74,6 +76,41 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.Log("You are dead.");
             health = 0.0f;
+        }
+
+        //Turn Flashlight On/Off
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if(off== false)
+            {
+                off = true;
+                Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 0.0f;
+            }
+            else
+            {
+                off = false;
+                if (battery / batteryMax * 100 > 50)
+                {
+                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 5.00f;
+                }
+                if (battery / batteryMax * 100 <= 50)
+                {
+                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 2.85f;
+                }
+                if (battery / batteryMax * 100 <= 25)
+                {
+                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 2.0f;
+                }
+                if (battery / batteryMax * 100 <= 10)
+                {
+                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 1.35f;
+                }
+                if (battery / batteryMax * 100 <= 0)
+                {
+                    battery = 0.00f;
+                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 0.0f;
+                }
+            }
         }
 
         // if battery is low 50%
@@ -139,14 +176,17 @@ public class PlayerBehaviour : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(time);
+            if(off == false)
+            {
+                yield return new WaitForSeconds(time);
 
-            Debug.Log("Removing baterry value: " + value);
+                Debug.Log("Removing baterry value: " + value);
 
-            if (battery > 0)
-                battery -= value;
-            else
-                Debug.Log("The flashlight battery is out");
+                if (battery > 0)
+                    battery -= value;
+                else
+                    Debug.Log("The flashlight battery is out");
+            }
         }
     }
 
