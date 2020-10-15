@@ -50,7 +50,6 @@ public class PlayerBehaviour : MonoBehaviour
         // set initial battery values
         batterySlider.GetComponent<Slider>().maxValue = batteryMax;
         batterySlider.GetComponent<Slider>().value = batteryMax;
-        off = false;
 
         // start consume flashlight battery
         StartCoroutine(RemoveBaterryCharge(removeBatteryValue, secondToRemoveBaterry));
@@ -81,35 +80,13 @@ public class PlayerBehaviour : MonoBehaviour
         //Turn Flashlight On/Off
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(off== false)
+            if(Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().enabled == true)
             {
-                off = true;
-                Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 0.0f;
+                Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().enabled = false;
             }
             else
             {
-                off = false;
-                if (battery / batteryMax * 100 > 50)
-                {
-                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 5.00f;
-                }
-                if (battery / batteryMax * 100 <= 50)
-                {
-                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 2.85f;
-                }
-                if (battery / batteryMax * 100 <= 25)
-                {
-                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 2.0f;
-                }
-                if (battery / batteryMax * 100 <= 10)
-                {
-                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 1.35f;
-                }
-                if (battery / batteryMax * 100 <= 0)
-                {
-                    battery = 0.00f;
-                    Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().intensity = 0.0f;
-                }
+                Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().enabled = true;
             }
         }
 
@@ -176,7 +153,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         while (true)
         {
-            if(off == false)
+            if(Flashlight.transform.Find("Spotlight").gameObject.GetComponent<Light>().enabled == true)
             {
                 yield return new WaitForSeconds(time);
 
@@ -218,7 +195,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
 
-            Debug.Log("Healling player value: " + value);
+            Debug.Log("Healing player value: " + value);
 
             if (health > 0 && health < healthMax)
                 health += value;
