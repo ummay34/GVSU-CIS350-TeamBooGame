@@ -21,7 +21,6 @@ public class PlayerBehaviour : MonoBehaviour
     public float batteryMax = 100;
     public float removeBatteryValue = 0.05f;
     public float secondToRemoveBaterry = 5f;
-    public bool off;
 
     [Header("Audio Settings")]
     public AudioClip slenderNoise;
@@ -53,10 +52,25 @@ public class PlayerBehaviour : MonoBehaviour
 
         // start consume flashlight battery
         StartCoroutine(RemoveBaterryCharge(removeBatteryValue, secondToRemoveBaterry));
+
+        if(SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            battery = GlobalControl.Instance.battery;
+            health = GlobalControl.Instance.health;
+            collectedPages = GlobalControl.Instance.collectedPages;
+            healthSlider.GetComponent<Slider>().value = GlobalControl.Instance.health;
+            batterySlider.GetComponent<Slider>().value = GlobalControl.Instance.battery;
+        }
     }
 	
 	void Update ()
     {
+
+        //save player data
+        GlobalControl.Instance.battery = battery;
+        GlobalControl.Instance.health = health;
+        GlobalControl.Instance.collectedPages = collectedPages;
+
         // update player health slider
         healthSlider.GetComponent<Slider>().value = health;
 
