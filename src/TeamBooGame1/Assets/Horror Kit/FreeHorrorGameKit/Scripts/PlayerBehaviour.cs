@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 
+[System.Serializable]
 public class PlayerBehaviour : MonoBehaviour
 {
     [Header("Health Settings")]
@@ -160,6 +161,7 @@ public class PlayerBehaviour : MonoBehaviour
             // set quit button
             Button quitBtn = finishedGameUI.gameObject.transform.Find("QuitBtn").GetComponent<Button>();
             quitBtn.onClick.AddListener(this.gameObject.GetComponent<MenuInGame>().QuitGame);
+
         } 
     }
 

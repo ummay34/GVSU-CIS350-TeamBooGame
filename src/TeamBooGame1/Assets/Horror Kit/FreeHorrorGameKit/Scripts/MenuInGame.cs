@@ -11,6 +11,7 @@ public class MenuInGame : MonoBehaviour
     [Header("UI Settings")]
     public GameObject MainCanvas;
     public GameObject OptionsUI;
+    public GameObject PlayerControls;
     public Toggle fullscreenToggle;
     public Dropdown resolutionDropdown;
     public Dropdown vSyncDropdown;
@@ -80,6 +81,21 @@ public class MenuInGame : MonoBehaviour
         // add continue button listener
         Button btnContinue = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("ContinueBtn").gameObject.GetComponent<Button>();
         btnContinue.onClick.AddListener(Continue);
+
+        // add player controls button listener
+        Button btnPlayerControls = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("PlayerControlsBtn").gameObject.GetComponent<Button>();
+        btnPlayerControls.onClick.AddListener(PlayerControl);
+
+        // add save button listener
+        Button btnSave = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("SaveBtn").gameObject.GetComponent<Button>();
+        btnSave.onClick.AddListener(Options);
+
+        // add load button listener
+        Button btnLoad = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("LoadBtn").gameObject.GetComponent<Button>();
+        btnLoad.onClick.AddListener(Options);
+
+        Button btnCloseControls = MainCanvas.gameObject.transform.Find("PlayerControls").transform.Find("CloseControlsBtn").gameObject.GetComponent<Button>();
+        btnCloseControls.onClick.AddListener(CloseControls);
     }
 
     private void Update()
@@ -141,6 +157,12 @@ public class MenuInGame : MonoBehaviour
         OptionsUI.SetActive(false);
     }
 
+    public void CloseControls()
+    {
+        MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(true);
+        MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(false);
+    }
+
     public void StartGame()
     {
         // load main game scene
@@ -151,6 +173,34 @@ public class MenuInGame : MonoBehaviour
     {
         // reload menu scene
         SceneManager.LoadScene(0);
+    }
+
+    public void SaveGame()
+    {
+
+    }
+
+    public void LoadGame()
+    {
+
+    }
+
+    public void PlayerControl()
+    {
+        if (m_Scene.buildIndex == 0)
+        {
+            // show options UI    
+            MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
+            MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
+        }
+        else
+        {
+            // show options UI   and disable player behaviour  
+            this.gameObject.GetComponent<PlayerBehaviour>().paused = true;
+            MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
+            MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
+        }
+
     }
 
     public void Continue()
@@ -230,6 +280,7 @@ public class MenuInGame : MonoBehaviour
         // apply settings
         SaveSettings();
     }
+
 }
 
 

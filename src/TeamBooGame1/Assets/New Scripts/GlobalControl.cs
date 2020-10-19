@@ -7,7 +7,8 @@ public class GlobalControl : MonoBehaviour
     public static GlobalControl Instance;
     public float battery;
     public float health;
-    public int collectedPages = 3;
+    public int collectedPages = 0;
+    public int level;
 
     void Awake()
     {
