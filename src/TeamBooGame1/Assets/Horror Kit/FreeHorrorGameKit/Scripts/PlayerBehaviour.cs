@@ -71,6 +71,7 @@ public class PlayerBehaviour : MonoBehaviour
         GlobalControl.Instance.battery = battery;
         GlobalControl.Instance.health = health;
         GlobalControl.Instance.collectedPages = collectedPages;
+        
 
         // update player health slider
         healthSlider.GetComponent<Slider>().value = health;

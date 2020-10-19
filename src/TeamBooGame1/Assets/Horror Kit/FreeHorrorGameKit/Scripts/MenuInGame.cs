@@ -88,12 +88,13 @@ public class MenuInGame : MonoBehaviour
 
         // add save button listener
         Button btnSave = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("SaveBtn").gameObject.GetComponent<Button>();
-        btnSave.onClick.AddListener(Options);
+        btnSave.onClick.AddListener(SaveGame);
 
         // add load button listener
         Button btnLoad = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("LoadBtn").gameObject.GetComponent<Button>();
-        btnLoad.onClick.AddListener(Options);
+        btnLoad.onClick.AddListener(LoadGame);
 
+        //add close controls button listener
         Button btnCloseControls = MainCanvas.gameObject.transform.Find("PlayerControls").transform.Find("CloseControlsBtn").gameObject.GetComponent<Button>();
         btnCloseControls.onClick.AddListener(CloseControls);
     }
@@ -159,6 +160,7 @@ public class MenuInGame : MonoBehaviour
 
     public void CloseControls()
     {
+        //close player controls panel
         MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(true);
         MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(false);
     }
@@ -177,25 +179,29 @@ public class MenuInGame : MonoBehaviour
 
     public void SaveGame()
     {
-
+        PlayerPrefs.SetFloat("playerHealth", this.gameObject.GetComponent<PlayerBehaviour>().health);
+        PlayerPrefs.SetFloat("playerBattery", this.gameObject.GetComponent<PlayerBehaviour>().battery);
+        PlayerPrefs.SetInt("playerLevel", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.SetInt("collectedPages", this.gameObject.GetComponent<PlayerBehaviour>().collectedPages);
     }
 
     public void LoadGame()
     {
-
+        this.gameObject.GetComponent<PlayerBehaviour>().collectedPages = PlayerPrefs.GetInt("collectedPages");
+        SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
     }
 
     public void PlayerControl()
     {
         if (m_Scene.buildIndex == 0)
         {
-            // show options UI    
+            // show player controls panel    
             MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
             MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
         }
         else
         {
-            // show options UI   and disable player behaviour  
+            // show player controls panel   and disable player behaviour  
             this.gameObject.GetComponent<PlayerBehaviour>().paused = true;
             MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
             MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
