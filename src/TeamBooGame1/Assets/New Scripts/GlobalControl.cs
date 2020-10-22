@@ -9,6 +9,10 @@ public class GlobalControl : MonoBehaviour
     public float health;
     public int collectedPages = 0;
     public int level;
+    public float batteryChange;
+    public float healthChange;
+    public int pagesChange;
+        
 
     void Awake()
     {

@@ -30,6 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Page System Settings")]
     public List<GameObject> pages = new List<GameObject>();
     public int collectedPages;
+    public int changed = 1;
 
     [Header("UI Settings")]
     public GameObject inGameMenuUI;
@@ -37,6 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject finishedGameUI;
     public GameObject pagesCount;
     public bool paused;
+    
 
 	void Start ()
     {
@@ -56,12 +58,31 @@ public class PlayerBehaviour : MonoBehaviour
 
         if(SceneManager.GetActiveScene().buildIndex != 1)
         {
-            battery = GlobalControl.Instance.battery;
-            health = GlobalControl.Instance.health;
-            collectedPages = GlobalControl.Instance.collectedPages;
-            healthSlider.GetComponent<Slider>().value = GlobalControl.Instance.health;
-            batterySlider.GetComponent<Slider>().value = GlobalControl.Instance.battery;
+            if(changed == 1)
+            {
+                health = PlayerPrefs.GetFloat("playerHealth");
+                battery = PlayerPrefs.GetFloat("playerBattery");
+                collectedPages = PlayerPrefs.GetInt("collectedPages");
+                changed = 0;
+            }
+            else
+            {
+                battery = GlobalControl.Instance.battery;
+                health = GlobalControl.Instance.health;
+                collectedPages = GlobalControl.Instance.collectedPages;
+                //this.gameObject.GetComponent<PlayerBehaviour>().collectedPages = PlayerPrefs.GetInt("collectedPages");
+                healthSlider.GetComponent<Slider>().value = GlobalControl.Instance.health;
+                batterySlider.GetComponent<Slider>().value = GlobalControl.Instance.battery;
+            }
         }
+
+        // add save button listener
+        Button btnSave = inGameMenuUI.gameObject.transform.Find("SaveBtn").gameObject.GetComponent<Button>();
+        btnSave.onClick.AddListener(SaveGame);
+
+        // add load button listener
+        Button btnLoad = inGameMenuUI.gameObject.transform.Find("LoadBtn").gameObject.GetComponent<Button>();
+        btnLoad.onClick.AddListener(LoadGame);
     }
 	
 	void Update ()
@@ -71,7 +92,6 @@ public class PlayerBehaviour : MonoBehaviour
         GlobalControl.Instance.battery = battery;
         GlobalControl.Instance.health = health;
         GlobalControl.Instance.collectedPages = collectedPages;
-        
 
         // update player health slider
         healthSlider.GetComponent<Slider>().value = health;
@@ -278,5 +298,21 @@ public class PlayerBehaviour : MonoBehaviour
         // disable UI
         if (collider.gameObject.transform.tag == "Page")
             pickUpUI.SetActive(false);
+    }
+
+    private void SaveGame()
+    {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetFloat("playerHealth", health);
+        PlayerPrefs.SetFloat("playerBattery", battery);
+        PlayerPrefs.SetInt("playerLevel", scene);
+        PlayerPrefs.SetInt("collectedPages", collectedPages);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadGame()
+    {
+        changed = 1;
+        SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
     }
 }

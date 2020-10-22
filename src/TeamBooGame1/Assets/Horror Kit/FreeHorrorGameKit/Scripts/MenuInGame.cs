@@ -22,6 +22,7 @@ public class MenuInGame : MonoBehaviour
     public Button applyButton;
     public Resolution[] resolutions;
     public GameSettings gameSettings;
+    public static int levelChange = 0;
 
     // Scene
     Scene m_Scene;
@@ -86,14 +87,6 @@ public class MenuInGame : MonoBehaviour
         Button btnPlayerControls = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("PlayerControlsBtn").gameObject.GetComponent<Button>();
         btnPlayerControls.onClick.AddListener(PlayerControl);
 
-        // add save button listener
-        Button btnSave = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("SaveBtn").gameObject.GetComponent<Button>();
-        btnSave.onClick.AddListener(SaveGame);
-
-        // add load button listener
-        Button btnLoad = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("LoadBtn").gameObject.GetComponent<Button>();
-        btnLoad.onClick.AddListener(LoadGame);
-
         //add close controls button listener
         Button btnCloseControls = MainCanvas.gameObject.transform.Find("PlayerControls").transform.Find("CloseControlsBtn").gameObject.GetComponent<Button>();
         btnCloseControls.onClick.AddListener(CloseControls);
@@ -101,6 +94,7 @@ public class MenuInGame : MonoBehaviour
 
     private void Update()
     {
+
         // get current scene
         m_Scene = SceneManager.GetActiveScene();
 
@@ -179,16 +173,16 @@ public class MenuInGame : MonoBehaviour
 
     public void SaveGame()
     {
-        PlayerPrefs.SetFloat("playerHealth", this.gameObject.GetComponent<PlayerBehaviour>().health);
-        PlayerPrefs.SetFloat("playerBattery", this.gameObject.GetComponent<PlayerBehaviour>().battery);
-        PlayerPrefs.SetInt("playerLevel", SceneManager.GetActiveScene().buildIndex);
-        PlayerPrefs.SetInt("collectedPages", this.gameObject.GetComponent<PlayerBehaviour>().collectedPages);
+        
     }
 
     public void LoadGame()
     {
-        this.gameObject.GetComponent<PlayerBehaviour>().collectedPages = PlayerPrefs.GetInt("collectedPages");
-        SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
+        levelChange = 1;
+        //this.gameObject.GetComponent<PlayerBehaviour>().collectedPages = PlayerPrefs.GetInt("collectedPages");
+        
+        //this.gameObject.GetComponent<PlayerBehaviour>().health = PlayerPrefs.GetFloat("playerHealth");
+        //this.gameObject.GetComponent<PlayerBehaviour>().battery = PlayerPrefs.GetFloat("playerBattery");
     }
 
     public void PlayerControl()
