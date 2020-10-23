@@ -29,6 +29,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Page System Settings")]
     public List<GameObject> pages = new List<GameObject>();
+    public GameObject Pages;
     public int collectedPages;
 
     [Header("UI Settings")]
@@ -64,6 +65,12 @@ public class PlayerBehaviour : MonoBehaviour
                 health = GlobalControl.Instance.healthChange;
                 battery = GlobalControl.Instance.batteryChange;
                 collectedPages = GlobalControl.Instance.pagesChange;
+                foreach(string i in GlobalControl.Instance.pagesList){
+                    GameObject p = GameObject.Find(i);
+                    Debug.Log(i);
+                    pages.Add(p);
+                    p.SetActive(false);
+                }
                 healthSlider.GetComponent<Slider>().value = GlobalControl.Instance.healthChange;
                 batterySlider.GetComponent<Slider>().value = GlobalControl.Instance.batteryChange;
                 GlobalControl.Instance.levelChange = 0;
@@ -359,6 +366,10 @@ public class PlayerBehaviour : MonoBehaviour
         GlobalControl.Instance.pagesChange = collectedPages;
         int scene = SceneManager.GetActiveScene().buildIndex;
         GlobalControl.Instance.saveLevel = scene;
+        foreach(GameObject i in pages)
+        {
+            GlobalControl.Instance.pagesList.Add(i.name);
+        }
         saveAvailable = 1;
         inGameMenuUI.gameObject.transform.Find("SaveWarning").gameObject.SetActive(false);
     }

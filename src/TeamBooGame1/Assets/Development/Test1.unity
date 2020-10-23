@@ -1253,6 +1253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battery
       objectReference: {fileID: 0}
+    - target: {fileID: 1977700996600726, guid: 9d4191e0d9d5008409c0a5fd49ce7844, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4625323527650550, guid: 9d4191e0d9d5008409c0a5fd49ce7844, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.5386095
@@ -1316,7 +1320,7 @@ GameObject:
   - component: {fileID: 288467348}
   - component: {fileID: 288467350}
   m_Layer: 0
-  m_Name: Page_Always_Watches
+  m_Name: Page1
   m_TagString: Page
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1379,12 +1383,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288467347}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &288467350
 BoxCollider:
@@ -4292,7 +4296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &848442601
 GameObject:
@@ -5906,9 +5910,11 @@ MonoBehaviour:
   health: 100
   collectedPages: 0
   levelChange: 0
+  saveLevel: 0
   batteryChange: 0
   healthChange: 0
   pagesChange: 0
+  pagesList: []
 --- !u!4 &988357679
 Transform:
   m_ObjectHideFlags: 0
@@ -5921,7 +5927,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991300621
 GameObject:
