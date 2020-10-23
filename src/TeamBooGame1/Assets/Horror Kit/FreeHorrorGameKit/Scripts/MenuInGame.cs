@@ -22,7 +22,6 @@ public class MenuInGame : MonoBehaviour
     public Button applyButton;
     public Resolution[] resolutions;
     public GameSettings gameSettings;
-    public static int levelChange = 0;
 
     // Scene
     Scene m_Scene;
@@ -169,20 +168,6 @@ public class MenuInGame : MonoBehaviour
     {
         // reload menu scene
         SceneManager.LoadScene(0);
-    }
-
-    public void SaveGame()
-    {
-        
-    }
-
-    public void LoadGame()
-    {
-        levelChange = 1;
-        //this.gameObject.GetComponent<PlayerBehaviour>().collectedPages = PlayerPrefs.GetInt("collectedPages");
-        
-        //this.gameObject.GetComponent<PlayerBehaviour>().health = PlayerPrefs.GetFloat("playerHealth");
-        //this.gameObject.GetComponent<PlayerBehaviour>().battery = PlayerPrefs.GetFloat("playerBattery");
     }
 
     public void PlayerControl()

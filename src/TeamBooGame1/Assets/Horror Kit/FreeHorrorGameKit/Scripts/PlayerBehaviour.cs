@@ -30,7 +30,6 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Page System Settings")]
     public List<GameObject> pages = new List<GameObject>();
     public int collectedPages;
-    public int changed = 1;
 
     [Header("UI Settings")]
     public GameObject inGameMenuUI;
@@ -56,21 +55,23 @@ public class PlayerBehaviour : MonoBehaviour
         // start consume flashlight battery
         StartCoroutine(RemoveBaterryCharge(removeBatteryValue, secondToRemoveBaterry));
 
-        if(SceneManager.GetActiveScene().buildIndex != 1)
+        //loads saved player data
+        if(SceneManager.GetActiveScene().buildIndex != 0)
         {
-            if(changed == 1)
+            if(GlobalControl.Instance.levelChange == 1)
             {
-                health = PlayerPrefs.GetFloat("playerHealth");
-                battery = PlayerPrefs.GetFloat("playerBattery");
-                collectedPages = PlayerPrefs.GetInt("collectedPages");
-                changed = 0;
+                health = GlobalControl.Instance.healthChange;
+                battery = GlobalControl.Instance.batteryChange;
+                collectedPages = GlobalControl.Instance.pagesChange;
+                healthSlider.GetComponent<Slider>().value = GlobalControl.Instance.healthChange;
+                batterySlider.GetComponent<Slider>().value = GlobalControl.Instance.batteryChange;
+                GlobalControl.Instance.levelChange = 0;
             }
             else
             {
                 battery = GlobalControl.Instance.battery;
                 health = GlobalControl.Instance.health;
                 collectedPages = GlobalControl.Instance.collectedPages;
-                //this.gameObject.GetComponent<PlayerBehaviour>().collectedPages = PlayerPrefs.GetInt("collectedPages");
                 healthSlider.GetComponent<Slider>().value = GlobalControl.Instance.health;
                 batterySlider.GetComponent<Slider>().value = GlobalControl.Instance.battery;
             }
@@ -300,19 +301,20 @@ public class PlayerBehaviour : MonoBehaviour
             pickUpUI.SetActive(false);
     }
 
+    //saves player data when save button is pressed
     private void SaveGame()
     {
-        int scene = SceneManager.GetActiveScene().buildIndex;
-        PlayerPrefs.SetFloat("playerHealth", health);
-        PlayerPrefs.SetFloat("playerBattery", battery);
-        PlayerPrefs.SetInt("playerLevel", scene);
-        PlayerPrefs.SetInt("collectedPages", collectedPages);
+        GlobalControl.Instance.batteryChange = battery;
+        GlobalControl.Instance.healthChange = health;
+        GlobalControl.Instance.pagesChange = collectedPages;
+        PlayerPrefs.SetInt("playerLevel", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.Save();
     }
 
+    //loads level and player data when load button is pressed
     private void LoadGame()
     {
-        changed = 1;
+        GlobalControl.Instance.levelChange = 1;
         SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
     }
 }
