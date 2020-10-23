@@ -9,6 +9,7 @@ public class GlobalControl : MonoBehaviour
     public float health;
     public int collectedPages = 0;
     public int levelChange = 0;
+    public int saveLevel;
     public float batteryChange;
     public float healthChange;
     public int pagesChange;

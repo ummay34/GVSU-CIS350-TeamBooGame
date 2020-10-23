@@ -8788,6 +8788,11 @@ PrefabInstance:
       propertyPath: MapAudio
       value: 
       objectReference: {fileID: 831125910}
+    - target: {fileID: 114186385705180810, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: PlayerControls
+      value: 
+      objectReference: {fileID: 1374287486}
     - target: {fileID: 114495000732846764, guid: d244e81dfa06f8c418f07adb45c55fe1,
         type: 3}
       propertyPath: healthSlider

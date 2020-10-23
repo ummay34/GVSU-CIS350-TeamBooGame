@@ -37,7 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject finishedGameUI;
     public GameObject pagesCount;
     public bool paused;
-    int saveAvailable = 0;
+    public static int saveAvailable = 0;
     
 
 	void Start ()
@@ -342,7 +342,7 @@ public class PlayerBehaviour : MonoBehaviour
         if(saveAvailable == 1)
         {
             GlobalControl.Instance.levelChange = 1;
-            SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
+            SceneManager.LoadScene(GlobalControl.Instance.saveLevel);
         }
     }
 
@@ -357,8 +357,8 @@ public class PlayerBehaviour : MonoBehaviour
         GlobalControl.Instance.batteryChange = battery;
         GlobalControl.Instance.healthChange = health;
         GlobalControl.Instance.pagesChange = collectedPages;
-        PlayerPrefs.SetInt("playerLevel", SceneManager.GetActiveScene().buildIndex);
-        PlayerPrefs.Save();
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        GlobalControl.Instance.saveLevel = scene;
         saveAvailable = 1;
         inGameMenuUI.gameObject.transform.Find("SaveWarning").gameObject.SetActive(false);
     }
