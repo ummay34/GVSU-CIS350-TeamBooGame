@@ -37,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject finishedGameUI;
     public GameObject pagesCount;
     public bool paused;
+    int saveAvailable = 0;
     
 
 	void Start ()
@@ -84,6 +85,22 @@ public class PlayerBehaviour : MonoBehaviour
         // add load button listener
         Button btnLoad = inGameMenuUI.gameObject.transform.Find("LoadBtn").gameObject.GetComponent<Button>();
         btnLoad.onClick.AddListener(LoadGame);
+
+        //add no load button listener
+        Button btnNoLoad = inGameMenuUI.gameObject.transform.Find("LoadWarning").transform.Find("Image").transform.Find("NoLoadBtn").gameObject.GetComponent<Button>();
+        btnNoLoad.onClick.AddListener(NoLoad);
+
+        //add yes load button listener
+        Button btnYesLoad = inGameMenuUI.gameObject.transform.Find("LoadWarning").transform.Find("Image").transform.Find("YesLoadBtn").gameObject.GetComponent<Button>();
+        btnYesLoad.onClick.AddListener(YesLoad);
+
+        //add yes save button listener
+        Button btnYesSave = inGameMenuUI.gameObject.transform.Find("SaveWarning").transform.Find("Image").transform.Find("YesSaveBtn").gameObject.GetComponent<Button>();
+        btnYesSave.onClick.AddListener(YesSave);
+
+        //add no save button listener
+        Button btnNoSave = inGameMenuUI.gameObject.transform.Find("SaveWarning").transform.Find("Image").transform.Find("NoSaveBtn").gameObject.GetComponent<Button>();
+        btnNoSave.onClick.AddListener(NoSave);
     }
 	
 	void Update ()
@@ -301,20 +318,48 @@ public class PlayerBehaviour : MonoBehaviour
             pickUpUI.SetActive(false);
     }
 
-    //saves player data when save button is pressed
+    //bring up save warning screen
     private void SaveGame()
+    {
+        inGameMenuUI.gameObject.transform.Find("SaveWarning").gameObject.SetActive(true);
+    }
+
+    //bring up load warning screen
+    private void LoadGame()
+    {
+        inGameMenuUI.gameObject.transform.Find("LoadWarning").gameObject.SetActive(true);
+    }
+
+    //close load warning screen
+    private void NoLoad()
+    {
+        inGameMenuUI.gameObject.transform.Find("LoadWarning").gameObject.SetActive(false);
+    }
+
+    //load saved checkpoint
+    private void YesLoad()
+    {
+        if(saveAvailable == 1)
+        {
+            GlobalControl.Instance.levelChange = 1;
+            SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
+        }
+    }
+
+    //close save warning screen
+    private void NoSave()
+    {
+        inGameMenuUI.gameObject.transform.Find("SaveWarning").gameObject.SetActive(false);
+    }
+
+    private void YesSave()
     {
         GlobalControl.Instance.batteryChange = battery;
         GlobalControl.Instance.healthChange = health;
         GlobalControl.Instance.pagesChange = collectedPages;
         PlayerPrefs.SetInt("playerLevel", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.Save();
-    }
-
-    //loads level and player data when load button is pressed
-    private void LoadGame()
-    {
-        GlobalControl.Instance.levelChange = 1;
-        SceneManager.LoadScene(PlayerPrefs.GetInt("playerLevel"));
+        saveAvailable = 1;
+        inGameMenuUI.gameObject.transform.Find("SaveWarning").gameObject.SetActive(false);
     }
 }

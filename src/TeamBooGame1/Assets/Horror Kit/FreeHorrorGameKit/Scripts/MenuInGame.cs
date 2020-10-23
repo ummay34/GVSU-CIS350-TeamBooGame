@@ -89,6 +89,7 @@ public class MenuInGame : MonoBehaviour
         //add close controls button listener
         Button btnCloseControls = MainCanvas.gameObject.transform.Find("PlayerControls").transform.Find("CloseControlsBtn").gameObject.GetComponent<Button>();
         btnCloseControls.onClick.AddListener(CloseControls);
+
     }
 
     private void Update()
