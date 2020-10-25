@@ -152,6 +152,24 @@ public class MenuInGame : MonoBehaviour
         OptionsUI.SetActive(false);
     }
 
+    public void PlayerControl()
+    {
+        if (m_Scene.buildIndex == 0)
+        {
+            // show player controls panel    
+            MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
+            MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
+        }
+        else
+        {
+            // show player controls panel   and disable player behaviour  
+            this.gameObject.GetComponent<PlayerBehaviour>().paused = true;
+            MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
+            MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
+        }
+
+    }
+
     public void CloseControls()
     {
         //close player controls panel
@@ -171,23 +189,6 @@ public class MenuInGame : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void PlayerControl()
-    {
-        if (m_Scene.buildIndex == 0)
-        {
-            // show player controls panel    
-            MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
-            MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
-        }
-        else
-        {
-            // show player controls panel   and disable player behaviour  
-            this.gameObject.GetComponent<PlayerBehaviour>().paused = true;
-            MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
-            MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(true);
-        }
-
-    }
 
     public void Continue()
     {
