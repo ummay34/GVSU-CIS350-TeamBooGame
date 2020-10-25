@@ -90,6 +90,14 @@ public class MenuInGame : MonoBehaviour
         Button btnCloseControls = MainCanvas.gameObject.transform.Find("PlayerControls").transform.Find("CloseControlsBtn").gameObject.GetComponent<Button>();
         btnCloseControls.onClick.AddListener(CloseControls);
 
+        // add game objectives button listener
+        Button btnHow = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("HowBtn").gameObject.GetComponent<Button>();
+        btnHow.onClick.AddListener(GameObjectives);
+
+        // add close objectives button listener
+        Button btnCloseObjectives = MainCanvas.gameObject.transform.Find("InGameMenuPanel").transform.Find("CloseObjectivesBtn").gameObject.GetComponent<Button>();
+        btnCloseObjectives.onClick.AddListener(CloseObjectives);
+
     }
 
     private void Update()
@@ -175,6 +183,18 @@ public class MenuInGame : MonoBehaviour
         //close player controls panel
         MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(true);
         MainCanvas.gameObject.transform.Find("PlayerControls").gameObject.SetActive(false);
+    }
+
+    public void GameObjectives()
+    {
+        MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
+        MainCanvas.gameObject.transform.Find("GameObjectives").gameObject.SetActive(true);
+    }
+
+    public void CloseObjectives()
+    {
+        MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(true);
+        MainCanvas.gameObject.transform.Find("GameObjectives").gameObject.SetActive(false);
     }
 
     public void StartGame()
