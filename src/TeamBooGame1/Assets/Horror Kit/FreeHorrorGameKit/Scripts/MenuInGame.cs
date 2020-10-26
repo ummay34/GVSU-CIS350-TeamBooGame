@@ -187,12 +187,14 @@ public class MenuInGame : MonoBehaviour
 
     public void GameObjectives()
     {
+        //show game objectives panel
         MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(false);
         MainCanvas.gameObject.transform.Find("GameObjectives").gameObject.SetActive(true);
     }
 
     public void CloseObjectives()
     {
+        //close game objectives panel
         MainCanvas.gameObject.transform.Find("InGameMenuPanel").gameObject.SetActive(true);
         MainCanvas.gameObject.transform.Find("GameObjectives").gameObject.SetActive(false);
     }
