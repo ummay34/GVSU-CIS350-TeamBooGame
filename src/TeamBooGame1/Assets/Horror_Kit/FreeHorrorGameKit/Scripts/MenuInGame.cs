@@ -267,13 +267,13 @@ public class MenuInGame : MonoBehaviour
     {
         // save game settings to json file
         string jsonData = JsonUtility.ToJson(gameSettings, true);
-        File.WriteAllText("Assets/FreeHorrorGameKit/gamesettings.json", jsonData);
+        File.WriteAllText("Assets/Horror_Kit/FreeHorrorGameKit/gamesettings.json", jsonData);
     }
 
     void LoadSettings()
     {
         // load game settings from json file
-        gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText("Assets/FreeHorrorGameKit/gamesettings.json"));
+        gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText("Assets/Horror_Kit/FreeHorrorGameKit/gamesettings.json"));
         musicVolumeSlider.value = gameSettings.musicVolume;
         antialiasingDropdown.value = gameSettings.antialiasing;
         vSyncDropdown.value = gameSettings.vSync;
