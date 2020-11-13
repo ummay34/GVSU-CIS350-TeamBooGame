@@ -359,6 +359,7 @@ public class PlayerBehaviour : MonoBehaviour
         inGameMenuUI.gameObject.transform.Find("SaveWarning").gameObject.SetActive(false);
     }
 
+    //save game
     private void YesSave()
     {
         GlobalControl.Instance.batteryChange = battery;
