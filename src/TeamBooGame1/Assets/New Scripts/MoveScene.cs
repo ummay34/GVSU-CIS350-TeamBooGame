@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class MoveScene : MonoBehaviour
 {
     [SerializeField] private string loadLevel;
-   
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && TurnLightOn.Instance.on == true)
         {
             SceneManager.LoadScene(loadLevel);
         }
