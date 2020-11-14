@@ -55,7 +55,7 @@ public class ZombieBehavior : MonoBehaviour
         if (dist > 5f)
         {
             zombieState = ZombieState.running;
-            animator.SetBool("attacking", false);
+            animator.SetBool("attack", false);
         }
     }
 
