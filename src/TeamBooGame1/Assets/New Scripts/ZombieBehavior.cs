@@ -58,6 +58,7 @@ public class ZombieBehavior : MonoBehaviour
     private void OnAttacking(float dist)
     {
         //nm.SetDestination(transform.position);
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         if (dist > 6f)
         {
             StopCoroutine(damagePlayer);
