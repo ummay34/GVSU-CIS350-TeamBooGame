@@ -11,12 +11,18 @@ public class ZombieBehavior : MonoBehaviour
     NavMeshAgent nm;
     public Transform player;
     public Animator animator;
-    
+
+    IEnumerator damagePlayer;
+    IEnumerator healPlayer = null;
+    public float damage = 5.0f;
+    public float secondToDamagePlayer = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         nm = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        damagePlayer = player.GetComponent<PlayerBehaviour>().RemovePlayerHealth(damage, secondToDamagePlayer);
     }
 
     // Update is called once per frame
@@ -51,11 +57,15 @@ public class ZombieBehavior : MonoBehaviour
 
     private void OnAttacking(float dist)
     {
-        nm.SetDestination(transform.position);
-        if (dist > 5f)
+        //nm.SetDestination(transform.position);
+        if (dist > 6f)
         {
+            StopCoroutine(damagePlayer);
             zombieState = ZombieState.running;
             animator.SetBool("attack", false);
+            healPlayer = player.GetComponent<PlayerBehaviour>().StartHealPlayer(player.GetComponent<PlayerBehaviour>().healValue,
+                player.GetComponent<PlayerBehaviour>().secondToHeal);
+            StartCoroutine(healPlayer);
         }
     }
 
@@ -64,11 +74,16 @@ public class ZombieBehavior : MonoBehaviour
         if (CanSeePlayer())
         {
             nm.SetDestination(player.position);
-            if (distance < 5f)
+            if (distance <= 6f)
             {
                 zombieState = ZombieState.attacking;
-                //animator.SetBool("running", false);
+                animator.SetBool("running", false);
                 animator.SetBool("attack", true);
+                if (healPlayer != null)
+                {
+                    StopCoroutine(healPlayer);
+                }
+                StartCoroutine(damagePlayer);
             }
         }
         else
