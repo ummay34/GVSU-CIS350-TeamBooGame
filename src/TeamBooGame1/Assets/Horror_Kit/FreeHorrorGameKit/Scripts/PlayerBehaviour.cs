@@ -181,7 +181,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         // page system
-        pagesCount.GetComponent<Text>().text = "Collected Pages: " + collectedPages + "/8";
+        pagesCount.GetComponent<Text>().text = "Collected Pages: " + collectedPages + "/10";
 
         //animations
         if (Input.GetKey(KeyCode.LeftShift))
@@ -190,7 +190,7 @@ public class PlayerBehaviour : MonoBehaviour
             this.gameObject.GetComponent<Animation>().CrossFade("Idle", 1);
 
         // collected all pages
-        if (collectedPages >= 8)
+        if (collectedPages >= 10)
         {
             Debug.Log("You finished the game, congratulations...");
             Cursor.visible = true;

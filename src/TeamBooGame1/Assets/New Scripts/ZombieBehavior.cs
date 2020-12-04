@@ -5,7 +5,13 @@ using UnityEngine.AI;
 
 public class ZombieBehavior : MonoBehaviour
 {
-    public enum ZombieState{idle, walking, running, attacking};
+    public enum ZombieState { idle, walking, running, attacking };
+
+    public Transform[] waypoints;
+    public int speed;
+
+    private int waypointIndex;
+    private float WaypointDist;
 
     public ZombieState zombieState = ZombieState.idle;
     NavMeshAgent nm;
@@ -20,9 +26,12 @@ public class ZombieBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        waypointIndex = 0;
+        transform.LookAt(waypoints[waypointIndex].position);
         nm = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         damagePlayer = player.GetComponent<PlayerBehaviour>().RemovePlayerHealth(damage, secondToDamagePlayer);
+
     }
 
     // Update is called once per frame
@@ -32,6 +41,11 @@ public class ZombieBehavior : MonoBehaviour
         switch (zombieState)
         {
             case (ZombieState.idle):
+                WaypointDist = Vector3.Distance(transform.position, waypoints[waypointIndex].position);
+                if (WaypointDist < 1f)
+                {
+                    IncreaseIndex();
+                }
                 OnIdle();
                 break;
             case (ZombieState.running):
@@ -47,6 +61,8 @@ public class ZombieBehavior : MonoBehaviour
 
     private void OnIdle()
     {
+        Patrol();
+
         if (CanSeePlayer())
         {
             zombieState = ZombieState.running;
@@ -102,13 +118,30 @@ public class ZombieBehavior : MonoBehaviour
         Ray ray = new Ray(transform.position, direction);
         if (Physics.Raycast(ray, out RaycastHit hit, 30f))
         {
-            if(hit.collider.tag == "Player" && angle < 80f)
+            if (hit.collider.tag == "Player" && angle < 80f)
             {
                 return true;
             }
         }
         return false;
     }
+
+    void Patrol()
+    {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    void IncreaseIndex()
+    {
+        waypointIndex++;
+        if (waypointIndex >= waypoints.Length)
+        {
+            waypointIndex = 0;
+        }
+        transform.LookAt(waypoints[waypointIndex].position);
+    }
+
+
 
 
 }
