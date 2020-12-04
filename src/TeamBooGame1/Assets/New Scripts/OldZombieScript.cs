@@ -3,15 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieBehavior : MonoBehaviour
+public class OldZombieScript : MonoBehaviour
 {
     public enum ZombieState { idle, walking, running, attacking };
-
-    public Transform[] waypoints;
-    public int speed;
-
-    public int waypointIndex;
-    private float WaypointDist;
 
     public ZombieState zombieState = ZombieState.idle;
     NavMeshAgent nm;
@@ -26,12 +20,9 @@ public class ZombieBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        waypointIndex = 0;
-        transform.LookAt(waypoints[waypointIndex].position);
         nm = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         damagePlayer = player.GetComponent<PlayerBehaviour>().RemovePlayerHealth(damage, secondToDamagePlayer);
-
     }
 
     // Update is called once per frame
@@ -42,14 +33,6 @@ public class ZombieBehavior : MonoBehaviour
         {
             case (ZombieState.idle):
                 OnIdle();
-                break;
-            case (ZombieState.walking):
-                WaypointDist = Vector3.Distance(transform.position, waypoints[waypointIndex].position);
-                if (WaypointDist < 3f)
-                {
-                    IncreaseIndex();
-                }
-                onWalking();
                 break;
             case (ZombieState.running):
                 OnRunning(dist);
@@ -64,13 +47,6 @@ public class ZombieBehavior : MonoBehaviour
 
     private void OnIdle()
     {
-        if (!CanSeePlayer())
-        {
-            nm.speed = 1.5f;
-            zombieState = ZombieState.walking;
-            animator.SetBool("walking", true);
-        }
-
         if (CanSeePlayer())
         {
             zombieState = ZombieState.running;
@@ -126,42 +102,13 @@ public class ZombieBehavior : MonoBehaviour
         Ray ray = new Ray(transform.position, direction);
         if (Physics.Raycast(ray, out RaycastHit hit, 30f))
         {
-            if (hit.collider.tag == "Player" && angle < 90f)
+            if (hit.collider.tag == "Player" && angle < 80f)
             {
                 return true;
             }
         }
         return false;
     }
-
-    void onWalking()
-    {
-        nm.SetDestination(waypoints[waypointIndex].position);
-        if (CanSeePlayer())
-        {
-            nm.SetDestination(transform.position);
-            zombieState = ZombieState.running;
-            animator.SetBool("walking", false);
-            animator.SetBool("running", true);
-        }
-    }
-
-    void Patrol()
-    {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
-    void IncreaseIndex()
-    {
-        waypointIndex++;
-        if (waypointIndex >= waypoints.Length)
-        {
-            waypointIndex = 0;
-        }
-        //transform.LookAt(waypoints[waypointIndex].position);
-    }
-
-
 
 
 }
