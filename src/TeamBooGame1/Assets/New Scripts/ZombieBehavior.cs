@@ -82,6 +82,15 @@ public class ZombieBehavior : MonoBehaviour
     private void OnAttacking(float dist)
     {
         //nm.SetDestination(transform.position);
+        if (GlobalControl.Instance.isPaused)
+        {
+            zombieState = ZombieState.idle;
+            StopCoroutine(damagePlayer);
+            animator.SetBool("attack", false);
+            healPlayer = player.GetComponent<PlayerBehaviour>().StartHealPlayer(player.GetComponent<PlayerBehaviour>().healValue,
+                player.GetComponent<PlayerBehaviour>().secondToHeal);
+            StartCoroutine(healPlayer);
+        }
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         if (dist > 6f)
         {
@@ -121,6 +130,10 @@ public class ZombieBehavior : MonoBehaviour
 
     bool CanSeePlayer()
     {
+        if (GlobalControl.Instance.isPaused)
+        {
+            return false;
+        }
         Vector3 direction = (player.position - transform.position).normalized;
         float angle = Vector3.Angle(transform.forward, direction);
         Ray ray = new Ray(transform.position, direction);

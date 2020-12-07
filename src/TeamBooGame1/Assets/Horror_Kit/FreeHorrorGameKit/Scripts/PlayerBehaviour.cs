@@ -118,6 +118,9 @@ public class PlayerBehaviour : MonoBehaviour
         GlobalControl.Instance.health = health;
         GlobalControl.Instance.collectedPages = collectedPages;
 
+        //paused state
+        GlobalControl.Instance.isPaused = paused;
+
         // update player health slider
         healthSlider.GetComponent<Slider>().value = health;
 

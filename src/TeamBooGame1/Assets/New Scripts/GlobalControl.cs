@@ -13,6 +13,7 @@ public class GlobalControl : MonoBehaviour
     public float batteryChange;
     public float healthChange;
     public int pagesChange;
+    public bool isPaused;
     public List<string> pagesList = new List<string>();
 
 
