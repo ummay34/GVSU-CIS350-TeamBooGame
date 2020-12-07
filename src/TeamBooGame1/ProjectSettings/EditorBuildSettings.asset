@@ -15,9 +15,15 @@ EditorBuildSettings:
     path: Assets/Game_Levels/MainMenu.unity
     guid: 35919d75f04a3834b93c0ad997f54e05
   - enabled: 1
-    path: Assets/Development/Test1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Game_Levels/Floor1.unity
+    guid: 2500fb2348039e44585df28fb385e25f
   - enabled: 1
-    path: Assets/Development/Test2.5.unity
-    guid: 6dd984e760302e44e9bf482fc5e71639
+    path: Assets/Game_Levels/Floor2.unity
+    guid: 2f852df9c0e2d0342a75f3c7977437af
+  - enabled: 1
+    path: Assets/Game_Levels/Floor3.unity
+    guid: 4163644fa2e3d4b45aff0d4e503a204c
+  - enabled: 1
+    path: Assets/Game_Levels/Floor4.unity
+    guid: 88be3a4d56527c94a93aec90e6a7ba87
   m_configObjects: {}
