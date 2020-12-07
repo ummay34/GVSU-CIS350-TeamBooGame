@@ -6503,6 +6503,7 @@ MonoBehaviour:
   batteryChange: 0
   healthChange: 0
   pagesChange: 0
+  isPaused: 0
   pagesList: []
 --- !u!4 &832284730
 Transform:
@@ -9754,6 +9755,36 @@ PrefabInstance:
       propertyPath: PlayerControls
       value: 
       objectReference: {fileID: 356669939}
+    - target: {fileID: 114471480900168432, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: m_FootstepSounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114471480900168432, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: m_FootstepSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a6e2596331387124da8e81d37da68ae2, type: 3}
+    - target: {fileID: 114471480900168432, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: m_FootstepSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: ec02951caf7cd1f4fbc24fe9960cc69a, type: 3}
+    - target: {fileID: 114471480900168432, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: m_FootstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a7a2d7c3f0efa7408e14bd09744808d, type: 3}
+    - target: {fileID: 114471480900168432, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: m_FootstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 27ff539436f259348b7138c14d3885cc, type: 3}
+    - target: {fileID: 114471480900168432, guid: d244e81dfa06f8c418f07adb45c55fe1,
+        type: 3}
+      propertyPath: m_FootstepSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a70895712392d4345be385abfae08f28, type: 3}
     - target: {fileID: 114495000732846764, guid: d244e81dfa06f8c418f07adb45c55fe1,
         type: 3}
       propertyPath: healthSlider
