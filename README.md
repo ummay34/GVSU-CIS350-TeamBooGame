@@ -1,11 +1,11 @@
 # Team Boo
 
-Our project is to make a 3D horror-themed game in Unity. Our goal is to make a thrilling game where the player must escape a haunted house, completing various tasks on the way. Players will face enemies and a variety of spooky rooms before they are able to achieve this goal.
+A 3-D unity based horror game. Main objective of the game is to esacpe the house which consists of multiple floors. Each floor has a unique layout where enemies may be present. To win the game you need to collect all the pages on each floor to escape!
 
 ## Team Members and Roles
 
 * [Jake Irons](https://github.com/ironsj/CIS350-HW2-Irons) (Animations, Textures)
-* [Ummayair Ahmad](https://github.com/ummay34) (AI, Role 2)
+* [Ummayair Ahmad](https://github.com/ummay34) (AI)
 * [Justin Jahlas](https://github.com/JustinJ1109) (Sound FX, Assets)
 * [Lauren Freeman](https://github.com/freemanlau) (Scenario, Environment)
 * [Josh Fitch](https://github.com/fitchj) (Character Controller, Flashlight, In-game UI)
